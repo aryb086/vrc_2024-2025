@@ -3,6 +3,10 @@
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup left_motors({-19, -13, -2}, pros::MotorGearset::blue); 
 pros::MotorGroup right_motors({16, 15, 14}, pros::MotorGearset::blue); 
+pros::MotorGroup intake_motors({10, -4}, pros::MotorGearset::green);
+bool intakeStarted = false;
+
+
 
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group

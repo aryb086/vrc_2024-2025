@@ -3,6 +3,7 @@
 #include "robot.h"
 #include "utils.h"
 
+
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
@@ -26,6 +27,24 @@ void opcontrol() {
         int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
         int rightY = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
         chassis.tank(leftY, rightY);
-        pros::delay(25);
+
+
+    bool intakeStarted = false;
+
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
+        intake_motors.move(120);
+        ;intakeStarted = true;
+    }else{
+        intake_motors.move(0)
+        ;intakeStarted = false;
     }
+
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+        intake_motors.move(0);
+    }
+
+        pros::delay(25);
+
+    }
+    
 }

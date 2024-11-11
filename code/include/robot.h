@@ -8,3 +8,4 @@
 // Controller and drivetrain declarations
 extern pros::Controller controller;
 extern lemlib::Chassis chassis;
+extern pros::MotorGroup intake_motors;
