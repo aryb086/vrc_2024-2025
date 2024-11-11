@@ -4,5 +4,5 @@
 
 void autonomous() {
     chassis.setPose(0, 0, 0);
-    chassis.turnToHeading(180, 100000);
+    chassis.moveToPose(60, 20, 90, 4000);
 }
