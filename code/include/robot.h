@@ -9,3 +9,4 @@
 extern pros::Controller controller;
 extern lemlib::Chassis chassis;
 extern pros::MotorGroup intake_motors;
+extern pros::ADIAnalogOut clamp;
