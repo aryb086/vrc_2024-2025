@@ -9,6 +9,7 @@ void initialize() {
     chassis.calibrate(); // calibrate sensors
     pros::Task screen_task([&]() {
         while (true) {
+            \
             // print robot location to the brain screen
             pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
@@ -24,11 +25,12 @@ void competition_initialize() {}
 
 void opcontrol() {
     bool intake_running = false; 
+ 
     bool last_button_R1_state = false;
     bool intake_reversed = false;
     bool last_button_R2_state = false;
     bool last_button_down_state = false;
-    bool clamp_state = false; 
+    bool clamp_state = HIGH; 
     while (true) {
         // hello
         bool current_button_R1_state = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
@@ -46,23 +48,33 @@ void opcontrol() {
             intake_running = !intake_running;
 
             if (intake_running) {
-                intake_motors.move(100);
+                intake_motors.move(117);
             } else {
                 intake_motors.move(0);
+                bool intake_running = true;
             }
         }
 
         if (current_button_R2_state && !last_button_R2_state) {
-            intake_reversed = !intake_reversed; 
+            intake_running = !intake_running;
 
             if (intake_running) {
-                intake_motors.move(intake_reversed ? -100 : 100);
+                intake_motors.move(-117);
+            } else {
+                intake_motors.move(0);
+                bool intake_running = true;
+
             }
         }
 
         if (current_button_down_state && !last_button_down_state) {
             clamp_state = !clamp_state; // Toggle the state
-            clamp.set_value(clamp_state); // Update the analog output device
+
+            if(clamp_state) {
+                clamp.set_value(LOW);
+            } else {
+                clamp.set_value(HIGH);
+            }
         }
 
         last_button_R1_state = current_button_R1_state;
@@ -73,4 +85,24 @@ void opcontrol() {
 
     }
     
+}
+
+void intakeForward(){
+    intake_motors.move(117);
+}
+
+void intakeReverse(){
+    intake_motors.move(-117);
+}
+
+void intakeStop(){
+    intake_motors.move(0);
+}
+
+void clampOut(){
+    clamp.set_value(HIGH);
+}
+
+void clampIn(){
+    clamp.set_value(LOW);
 }
