@@ -87,22 +87,3 @@ void opcontrol() {
     
 }
 
-void intakeForward(){
-    intake_motors.move(117);
-}
-
-void intakeReverse(){
-    intake_motors.move(-117);
-}
-
-void intakeStop(){
-    intake_motors.move(0);
-}
-
-void clampOut(){
-    clamp.set_value(HIGH);
-}
-
-void clampIn(){
-    clamp.set_value(LOW);
-}
