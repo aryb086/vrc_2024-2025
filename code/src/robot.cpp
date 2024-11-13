@@ -3,8 +3,8 @@
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup left_motors({-19, -13, -2}, pros::MotorGearset::blue); 
 pros::MotorGroup right_motors({16, 15, 14}, pros::MotorGearset::blue); 
-pros::MotorGroup intake_motors({10, -4}, pros::MotorGearset::green);
-pros::ADiAnalogOut clamp ('A')
+pros::MotorGroup intake_motors({10, -4}, pros::MotorGearset::blue);
+pros::ADIDigitalOut clamp ('A');
 
 
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
