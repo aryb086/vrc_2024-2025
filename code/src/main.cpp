@@ -32,6 +32,7 @@ void opcontrol() {
     bool last_button_down_state = false;
     bool clamp_state = HIGH; 
     while (true) {
+        
         // hello
         bool current_button_R1_state = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
         bool current_button_R2_state = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
@@ -69,11 +70,13 @@ void opcontrol() {
 
         if (current_button_down_state && !last_button_down_state) {
             clamp_state = !clamp_state; // Toggle the state
-
+           
             if(clamp_state) {
                 clamp.set_value(LOW);
+                controller.print(1, 5, "  LOCK");
             } else {
                 clamp.set_value(HIGH);
+                controller.print(1, 5, "NO-LOCK");
             }
         }
 
