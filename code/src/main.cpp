@@ -32,6 +32,7 @@ void opcontrol() {
     bool last_button_down_state = false;
     bool clamp_state = HIGH; 
     while (true) {
+        
         // hello
         bool current_button_R1_state = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
         bool current_button_R2_state = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
@@ -48,7 +49,7 @@ void opcontrol() {
             intake_running = !intake_running;
 
             if (intake_running) {
-                intake_motors.move(117);
+                intake_motors.move(127);
             } else {
                 intake_motors.move(0);
                 bool intake_running = true;
@@ -59,7 +60,7 @@ void opcontrol() {
             intake_running = !intake_running;
 
             if (intake_running) {
-                intake_motors.move(-117);
+                intake_motors.move(-127);
             } else {
                 intake_motors.move(0);
                 bool intake_running = true;
@@ -69,11 +70,13 @@ void opcontrol() {
 
         if (current_button_down_state && !last_button_down_state) {
             clamp_state = !clamp_state; // Toggle the state
-
+           
             if(clamp_state) {
                 clamp.set_value(LOW);
+                controller.print(1, 5, "  LOCK");
             } else {
                 clamp.set_value(HIGH);
+                controller.print(1, 5, "NO-LOCK");
             }
         }
 
@@ -87,22 +90,3 @@ void opcontrol() {
     
 }
 
-void intakeForward(){
-    intake_motors.move(117);
-}
-
-void intakeReverse(){
-    intake_motors.move(-117);
-}
-
-void intakeStop(){
-    intake_motors.move(0);
-}
-
-void clampOut(){
-    clamp.set_value(HIGH);
-}
-
-void clampIn(){
-    clamp.set_value(LOW);
-}
