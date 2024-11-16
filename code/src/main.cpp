@@ -49,7 +49,7 @@ void opcontrol() {
             intake_running = !intake_running;
 
             if (intake_running) {
-                intake_motors.move(117);
+                intake_motors.move(127);
             } else {
                 intake_motors.move(0);
                 bool intake_running = true;
@@ -60,7 +60,7 @@ void opcontrol() {
             intake_running = !intake_running;
 
             if (intake_running) {
-                intake_motors.move(-117);
+                intake_motors.move(-127);
             } else {
                 intake_motors.move(0);
                 bool intake_running = true;
